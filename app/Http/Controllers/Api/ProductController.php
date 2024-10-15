@@ -38,7 +38,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'active' => 'required|boolean',
-            'price' => 'required|decimal',
+            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'stock' => 'required|integer',
             'ean_13' => 'required|string',
         ]);
@@ -68,7 +68,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'active' => 'required|boolean',
-            'price' => 'required|decimal',
+            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'stock' => 'required|integer',
             'ean_13' => 'required|string',
         ]);

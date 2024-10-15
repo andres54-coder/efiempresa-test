@@ -23,7 +23,7 @@ Route::apiResource('products', ProductController::class)->only('index');
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('products', ProductController::class)->except('index');
     Route::apiResource('taxes', TaxController::class);
-    Route::post('carts/{cart}/add-product', [CartController::class, 'addProduct']);
+    Route::post('/cart/add-product/{cart?}', [CartController::class, 'addProduct']);
     Route::get('carts/{cart}/calculate-total', [CartController::class, 'calculateTotal']);
     Route::get('carts/{cart}', [CartController::class, 'show']);
 });

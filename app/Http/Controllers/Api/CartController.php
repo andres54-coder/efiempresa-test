@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addProduct(Request $request, Cart $cart)
+    public function addProduct(Request $request, Cart $cart = null)
     {
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity;
@@ -18,7 +18,11 @@ class CartController extends Controller
         if ($product->stock < $quantity) {
             return response()->json(['error' => 'Not enough stock'], 400);
         }
-
+        if (!$cart) {
+            $cart = Cart::create([
+                'user_id' => $request->user()->id, // Asumiendo que el carrito está asociado a un usuario
+            ]);
+        }
         $cartItem = $cart->items()->create([
             'product_id' => $product->id,
             'quantity' => $quantity,
@@ -54,7 +58,6 @@ class CartController extends Controller
 
         return response()->json([
             'cart' => $cart,
-            'items' => $cart->items()->with('product')->get(),
             'total' => $total,
             'total_with_tax' => $totalWithTax,
             'tax' => $tax
