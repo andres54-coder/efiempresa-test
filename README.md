@@ -112,7 +112,7 @@ Esta documentación describe las rutas y funcionalidades de la API definidas en 
 ### Carritos
 
 #### Añadir Producto al Carrito
-- **Ruta:** `POST /carts/{cart}/add-product`
+- **Ruta:** `POST /cart/add-product/{cart?}`
 - **Middleware:** `auth:api`
 - **Controlador:** `CartController@addProduct`
 
